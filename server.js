@@ -1,12 +1,20 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
+const productRoutes = require("./routes/productRoutes");
 
 dotenv.config();
 
+// Connect Database
 connectDB();
 
 const app = express();
+
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use("/api/products", productRoutes);
 
 app.get("/", (req, res) => {
   res.send("E-Commerce API Running...");
